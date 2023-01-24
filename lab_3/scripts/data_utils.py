@@ -1,4 +1,4 @@
-from __future__ import print_function
+#from __future__ import print_function
 
 from builtins import range
 from six.moves import cPickle as pickle
@@ -97,12 +97,10 @@ def load_tiny_imagenet(path, dtype=np.float32, subtract_mean=True):
     Load TinyImageNet. Each of TinyImageNet-100-A, TinyImageNet-100-B, and
     TinyImageNet-200 have the same directory structure, so this can be used
     to load any of them.
-
     Inputs:
     - path: String giving path to the directory to load.
     - dtype: numpy datatype used to load the data.
     - subtract_mean: Whether to subtract the mean training image.
-
     Returns: A dictionary with the following entries:
     - class_names: A list where class_names[i] is a list of strings giving the
       WordNet names for class i in the loaded dataset.
@@ -222,11 +220,9 @@ def load_models(models_dir):
     Load saved models from disk. This will attempt to unpickle all files in a
     directory; any files that give errors on unpickling (such as README.txt)
     will be skipped.
-
     Inputs:
     - models_dir: String giving the path to a directory containing model files.
       Each model file is a pickled dictionary with a 'model' field.
-
     Returns:
     A dictionary mapping model file names to models.
     """
@@ -242,10 +238,8 @@ def load_models(models_dir):
 
 def load_imagenet_val(num=None):
     """Load a handful of validation images from ImageNet.
-
     Inputs:
     - num: Number of images to load (max of 25)
-
     Returns:
     - X: numpy array with shape [num, 224, 224, 3]
     - y: numpy array of integer image labels, shape [num]
@@ -260,7 +254,13 @@ def load_imagenet_val(num=None):
         print("cd cs231n/datasets")
         print("bash get_imagenet_val.sh")
         assert False, "Need to download imagenet_val_25.npz"
+
+    # modify the default parameters of np.load
+    # https://stackoverflow.com/questions/55890813/how-to-fix-object-arrays-cannot-be-loaded-when-allow-pickle-false-for-imdb-loa
+    np_load_old = np.load
+    np.load = lambda *a,**k: np_load_old(*a, allow_pickle=True, **k)
     f = np.load(imagenet_fn)
+    np.load = np_load_old
     X = f["X"]
     y = f["y"]
     class_names = f["label_map"].item()

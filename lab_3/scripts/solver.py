@@ -1,9 +1,9 @@
-from __future__ import print_function, division
-from future import standard_library
+#from __future__ import print_function, division
+#from future import standard_library
 
-standard_library.install_aliases()
-from builtins import range
-from builtins import object
+#standard_library.install_aliases()
+#from builtins import range
+#from builtins import object
 import os
 import pickle as pickle
 
@@ -17,25 +17,20 @@ class Solver(object):
     A Solver encapsulates all the logic necessary for training classification
     models. The Solver performs stochastic gradient descent using different
     update rules defined in optim.py.
-
     The solver accepts both training and validataion data and labels so it can
     periodically check classification accuracy on both training and validation
     data to watch out for overfitting.
-
     To train a model, you will first construct a Solver instance, passing the
     model, dataset, and various options (learning rate, batch size, etc) to the
     constructor. You will then call the train() method to run the optimization
     procedure and train the model.
-
     After the train() method returns, model.params will contain the parameters
     that performed best on the validation set over the course of training.
     In addition, the instance variable solver.loss_history will contain a list
     of all losses encountered during training and the instance variables
     solver.train_acc_history and solver.val_acc_history will be lists of the
     accuracies of the model on the training and validation set at each epoch.
-
     Example usage might look something like this:
-
     data = {
       'X_train': # training data
       'y_train': # training labels
@@ -52,27 +47,20 @@ class Solver(object):
                     num_epochs=10, batch_size=100,
                     print_every=100)
     solver.train()
-
-
     A Solver works on a model object that must conform to the following API:
-
     - model.params must be a dictionary mapping string parameter names to numpy
       arrays containing parameter values.
-
     - model.loss(X, y) must be a function that computes training-time loss and
       gradients, and test-time classification scores, with the following inputs
       and outputs:
-
       Inputs:
       - X: Array giving a minibatch of input data of shape (N, d_1, ..., d_k)
       - y: Array of labels, of shape (N,) giving labels for X where y[i] is the
         label for X[i].
-
       Returns:
       If y is None, run a test-time forward pass and return:
       - scores: Array of shape (N, C) giving classification scores for X where
         scores[i, c] gives the score of class c for X[i].
-
       If y is not None, run a training time forward and backward pass and
       return a tuple of:
       - loss: Scalar giving the loss
@@ -83,7 +71,6 @@ class Solver(object):
     def __init__(self, model, data, **kwargs):
         """
         Construct a new Solver instance.
-
         Required arguments:
         - model: A model object conforming to the API described above
         - data: A dictionary of training and validation data containing:
@@ -91,7 +78,6 @@ class Solver(object):
           'X_val': Array, shape (N_val, d_1, ..., d_k) of validation images
           'y_train': Array, shape (N_train,) of labels for training images
           'y_val': Array, shape (N_val,) of labels for validation images
-
         Optional arguments:
         - update_rule: A string giving the name of an update rule in optim.py.
           Default is 'sgd'.
@@ -214,7 +200,6 @@ class Solver(object):
     def check_accuracy(self, X, y, num_samples=None, batch_size=100):
         """
         Check accuracy of the model on the provided data.
-
         Inputs:
         - X: Array of data, of shape (N, d_1, ..., d_k)
         - y: Array of labels, of shape (N,)
@@ -222,7 +207,6 @@ class Solver(object):
           on num_samples datapoints.
         - batch_size: Split X and y into batches of this size to avoid using
           too much memory.
-
         Returns:
         - acc: Scalar giving the fraction of instances that were correctly
           classified by the model.

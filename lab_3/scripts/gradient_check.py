@@ -1,6 +1,6 @@
-from __future__ import print_function
-from builtins import range
-from past.builtins import xrange
+#from __future__ import print_function
+#from builtins import range
+#from past.builtins import xrange
 
 import numpy as np
 from random import randrange
@@ -63,14 +63,10 @@ def eval_numerical_gradient_blobs(f, inputs, output, h=1e-5):
     """
     Compute numeric gradients for a function that operates on input
     and output blobs.
-
     We assume that f accepts several input blobs as arguments, followed by a
     blob where outputs will be written. For example, f might be called like:
-
     f(x, w, out)
-
     where x and w are input Blobs, and the result of f will be written to out.
-
     Inputs:
     - f: function
     - inputs: tuple of input blobs
