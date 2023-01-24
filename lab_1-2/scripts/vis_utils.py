@@ -1,5 +1,5 @@
-from builtins import range
-from past.builtins import xrange
+#from builtins import range
+#from past.builtins import xrange
 
 from math import sqrt, ceil
 import numpy as np
@@ -7,7 +7,6 @@ import numpy as np
 def visualize_grid(Xs, ubound=255.0, padding=1):
     """
     Reshape a 4D tensor of image data to a grid for easy visualization.
-
     Inputs:
     - Xs: Data of shape (N, H, W, C)
     - ubound: Output grid will have values scaled to the range [0, ubound]
